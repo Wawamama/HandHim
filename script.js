@@ -29,7 +29,6 @@ const displayScore = (score) => {
     }
 }
 
-
 const displayLose = () =>  {
     dashesEl.textContent = 'PENDU !'
 }
@@ -55,11 +54,7 @@ startBtn.addEventListener('click', () => {
         span.textContent = '_'
         dashesEl.appendChild(span)
     })
-
-    //dashesEl.innerHTML = dashes.join(' ')
 })
-
-
 
 // SCREEN 2
 
@@ -84,20 +79,14 @@ guessBtn.addEventListener('click', () => {
             }
         })
 
+        // Show winning messages if all letters have been found
         guessedLetters.push(letter)
-
         if (newWinner.split('').every(ltr => guessedLetters.includes(ltr))){
             setTimeout(displayWin, 1000)
         }
-       
-
-
     } else {
         score --
         if (score <= 0) displayLose()
         displayScore(score)
     }
-
 })
-
-
