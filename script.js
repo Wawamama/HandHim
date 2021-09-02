@@ -7,19 +7,7 @@ const scoreEl = document.querySelector('#score')
 let winningWord = ''
 let score = 10
 let dashes = []
-
-startBtn.addEventListener('click', () => {
-    winningWord = document.querySelector('#winning-word').value
-
-    screen1.style.display = 'none'
-    screen2.style.display = 'block'
-
-    for (let i=0; i<winningWord.length; i++) {
-        dashes.push('_')
-    }
-
-    dashesEl.innerHTML = dashes.join(' ')
-})
+let displayedWord = ''
 
 const checkLetter = (letter, word) => {
     const wordArr = word.toLowerCase().split('')
@@ -39,6 +27,32 @@ const displayScore = (score) => {
     }
 }
 
+
+const displayWord = (word) => {
+
+}
+
+startBtn.addEventListener('click', () => {
+    winningWord = document.querySelector('#winning-word').value
+
+    screen1.style.display = 'none'
+    screen2.style.display = 'block'
+
+    for (let i=0; i<winningWord.length; i++) {
+        dashes.push('_')
+    }
+
+    winningWord.split('').forEach( (dash, idx) => {
+        let span = document.createElement('span')
+        span.textContent = '_'
+        dashesEl.appendChild(span)
+    })
+
+    //dashesEl.innerHTML = dashes.join(' ')
+})
+
+
+
 // SCREEN 2
 
 const guessField = document.querySelector('#guessField')
@@ -50,19 +64,16 @@ guessBtn.addEventListener('click', () => {
     if (checkLetter(letter, winningWord)) {
         console.log('yes !')
 
-        const arr = winningWord.split('')
-        newArr = []
+        let newWinner = winningWord
+        const spans = dashesEl.children
 
-        arr.forEach(ltr => {
+        newWinner.split('').forEach((ltr, idx) => {
             if (ltr === letter) {
-                newArr.push(letter)
-            } else {
-                
-                newArr.push('_')
+                console.log(spans[idx])
+                console.log(newWinner[idx])
+                spans[idx].textContent = newWinner[idx]
             }
         })
-
-        dashesEl.innerHTML = newArr.join(' ')
 
     } else {
         score --

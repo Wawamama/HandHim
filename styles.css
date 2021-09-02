@@ -34,3 +34,7 @@ body {
     margin-bottom: 3rem;
     text-align: center;
 }
+
+.guess-container > span {
+    margin-right: 1rem;
+}
